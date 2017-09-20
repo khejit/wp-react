@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+
+  .btn-container {
+    width: $menu-btn-size;
+  }
+}
+
+.logo-container {
+  max-width: 10rem;
+  text-align: center;
+}

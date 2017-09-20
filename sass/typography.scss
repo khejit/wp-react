@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Playfair+Display:700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Playfair+Display:700');
 
 $montserrat: 'Montserrat', sans-serif;
 $playfair: 'Playfair Display', serif;
+
+$h3: 1.602rem;
 
 body {
   font-family: $montserrat;
@@ -28,7 +30,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-  font-size: 1.602rem;
+  font-size: $h3;
   margin: 0.4em;
   text-transform: uppercase;
 }

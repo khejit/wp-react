@@ -2,6 +2,7 @@ module.exports = {
     tasks: './tasks',
     paths: {
         sass: './sass/**/*.scss',
+        sassMain: './sass/main.scss',
         scsslint: './scsslint.yml',
         entry: './js/index.jsx',
         js: './js/**/*.jsx',
