@@ -1,0 +1,61 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add gulp-inject-svg
+
+PATH: 
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Services\IPT\;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\TShell\TShell\;C:\Program Files\nodejs\;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\PuTTY\;C:\Program Files (x86)\Yarn\bin;C:\Users\misliwinski\AppData\Roaming\npm;C:\Users\misliwinski\AppData\Local\atom\bin;C:\Program Files\MongoDB\Server\3.4\bin;C:\Users\misliwinski\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.0.1
+
+Node version: 
+  6.9.5
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "search-and-sort",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "babel-core": "^6.7.2",
+      "babel-eslint": "^5.0.0",
+      "babel-loader": "^6.1.0",
+      "babel-preset-es2015": "^6.6.0",
+      "babel-preset-react": "^6.5.0",
+      "babel-preset-stage-0": "^6.5.0",
+      "browser-sync": "^2.11.1",
+      "gulp": "github:gulpjs/gulp#4.0",
+      "gulp-autoprefixer": "^3.1.0",
+      "gulp-load-plugins": "^1.2.0",
+      "gulp-minify-css": "^1.2.4",
+      "gulp-rename": "^1.2.2",
+      "gulp-sass": "^2.2.0",
+      "gulp-scss-lint": "^0.3.9",
+      "gulp-sourcemaps": "^1.6.0",
+      "gulp-svg-sprite": "^1.2.19",
+      "webpack-stream": "^3.1.0"
+    },
+    "dependencies": {
+      "react": "^0.14.7",
+      "react-dom": "^0.14.7"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\xampp\htdocs\react-gulp-boilerplate\node_modules\node-sass\vendor\win32-x64-48\binding.node'
+      at Error (native)
