@@ -4,7 +4,7 @@ const webpackStream = require('webpack-stream');
 const webpackConfig = require('./configs/webpack.config');
 
 module.exports = (gulp, plugins, config) => () => {
-    return gulp.src(config.paths.webpackSrc)
+    return gulp.src(config.paths.entry)
         .pipe(webpackStream(webpackConfig))
         .on('error', function handleError() {
             this.emit('end'); // Recover from errors

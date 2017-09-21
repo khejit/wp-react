@@ -29,6 +29,11 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-svg-sprite": "^1.2.19",
     "prop-types": "^15.5.10",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-promise-middleware": "^4.4.1",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack-stream": "^3.1.0"
