@@ -49,7 +49,17 @@ export default class MainLayout extends Component {
                     </div>
                 </section>
                 <section className="section footer">
-
+                    <ul className="footer__links links">
+                        <li className="links__link">
+                            <a href="#">About me</a>
+                        </li>
+                        <li className="links__link">
+                            <a href="#">My github</a>
+                        </li>
+                        <li className="links__link">
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
                 </section>
             </div>
         )
