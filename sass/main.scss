@@ -1,9 +1,9 @@
-@import 'normalize';
+@import 'vendors/index';
 
 @import 'variables';
 @import 'mixins';
 @import 'typography';
 
 @import 'general';
-@import 'layout';
-@import 'components';
+@import 'blocks/index';
+@import 'elements/index';
