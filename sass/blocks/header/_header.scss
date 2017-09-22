@@ -8,4 +8,10 @@
   .btn-container {
     width: $menu-btn-size;
   }
+
+  &.search-visible {
+    .logo {
+      opacity: 0;
+    }
+  }
 }

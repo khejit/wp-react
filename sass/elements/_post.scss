@@ -1,3 +1,42 @@
+$height: 24rem;
+$expanded-height: 2*$height;
+
+.post {
+  border: 0.1rem solid $border;
+  border-left: none;
+  border-right: none;
+  background-color: $grey;
+
+  height: $height;
+  transition: $default-transition;
+
+  &.expanded {
+    height: $expanded-height;
+
+    .post__image {
+      height: $height + 4rem;
+    }
+
+    .post__overlay {
+      opacity: 0;
+    }
+  }
+}
+
+.post__overlay {
+  transition: $default-transition;
+  position: absolute;
+  top: 0;
+}
+
+.post__image {
+  height: $height;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: $default-transition;
+}
+
 .post__content {
   position: absolute;
   z-index: 20;

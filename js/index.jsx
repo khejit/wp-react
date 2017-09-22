@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+require('babel-polyfill');
 import { Provider } from 'react-redux';
 import store from './store.jsx';
 //import App from './App.jsx';

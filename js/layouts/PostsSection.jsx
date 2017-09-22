@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+require('es6-promise').polyfill();
 import axios from 'axios';
 import store from '../store.jsx';
 import Post from '../components/Post.jsx';
@@ -29,7 +30,7 @@ class PostsSection extends Component {
             })
             .then(posts => {
                 store.dispatch({
-                    type: 'GET_POSTS',
+                    type: 'SET_POSTS',
                     posts
                 })
             });
@@ -58,7 +59,7 @@ class PostsSection extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        posts: store.postsState.posts
+        posts: store.postsState.filteredPosts
     }
 };
 
