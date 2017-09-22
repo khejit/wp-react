@@ -8,6 +8,10 @@ body {
   color: $grey;
 }
 
+body > svg {
+  @extend %visuallyhidden;
+}
+
 *, *:before, *:after {
   box-sizing: border-box;
 }

@@ -66,3 +66,9 @@ $ham-span-height: 0.2rem;
   border: 0.1rem solid $tag-border;
   font-size: $font-size-small;
 }
+
+.inner-overlay {
+  background-color: rgba(0,0,0,0.2);
+  width: 100%;
+  height: 100%;
+}

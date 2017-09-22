@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 const HamBtn = (props) => {
     let classList = `ham-btn${props.classList}`;
