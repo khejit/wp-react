@@ -1,6 +1,7 @@
 const defaultState = {
     posts: [],
-    filteredPosts: []
+    filteredPosts: [],
+    activePost: null
 };
 
 export default (state=defaultState, payload={}) => {
@@ -13,7 +14,7 @@ export default (state=defaultState, payload={}) => {
         case 'FILTER_POSTS':
             if(payload.postsFilter){
                 let filteredPosts = state.posts.filter(post => {
-                    return post.heading.includes(payload.postsFilter)
+                    return post.heading.toLowerCase().includes(payload.postsFilter.toLowerCase())
                 });
                 return Object.assign({}, state, {
                     filteredPosts: filteredPosts
@@ -23,6 +24,10 @@ export default (state=defaultState, payload={}) => {
                     filteredPosts: state.posts
                 });
             }
+        case 'SET_ACTIVE_POST':
+            return Object.assign({}, state, {
+                activePost: payload.activePost
+            })
     }
 
     return state;

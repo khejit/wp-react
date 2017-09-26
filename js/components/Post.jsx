@@ -6,12 +6,9 @@ export default class Post extends Component {
     constructor(props){
         super(props);
 
-        this.toggleExpand = this.toggleExpand.bind(this);
-        this.expand = this.expand.bind(this);
-        this.fold = this.fold.bind(this);
+        this.clickHandle = this.clickHandle.bind(this);
 
         this.state = {
-            expanded: false,
             classArray: [],
             tags: []
         }
@@ -21,13 +18,12 @@ export default class Post extends Component {
         this.getOwnTags();
     }
 
+    clickHandle(){
+        this.props.onClick()
+    }
+
     getOwnTags(){
-        let tags = this.props.tagsIds.map(tagId => {
-            return {
-                id: tagId,
-                name: stateHelpers.getTagById(tagId).name
-            }
-        });
+        let tags = stateHelpers.getTagsFromTagsIds(this.props.tagsIds);
 
         this.setState({
             tags: tags
@@ -36,28 +32,6 @@ export default class Post extends Component {
 
     classList(){
         return ' ' + this.state.classArray.join(' ')
-    }
-
-    toggleExpand(){
-        if(this.state.expanded){
-            this.fold()
-        } else {
-            this.expand()
-        }
-    }
-
-    expand(){
-        this.setState({
-            expanded: true,
-            classArray: ['expanded']
-        })
-    }
-
-    fold(){
-        this.setState({
-            expanded: false,
-            classArray: []
-        })
     }
 
     render(){
@@ -72,7 +46,7 @@ export default class Post extends Component {
         };
 
         return (
-            <div className={`post posts__post${this.classList()}`} onClick={this.toggleExpand}>
+            <div className="post posts__post" onClick={this.clickHandle}>
                 <div style={style} className="post__image"></div>
                 <div className="inner-overlay post__overlay"></div>
                 <div className="post__content">

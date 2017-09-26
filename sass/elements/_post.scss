@@ -5,22 +5,10 @@ $expanded-height: 2*$height;
   border: 0.1rem solid $border;
   border-left: none;
   border-right: none;
-  background-color: $grey;
+  position: relative;
 
   height: $height;
   transition: $default-transition;
-
-  &.expanded {
-    height: $expanded-height;
-
-    .post__image {
-      height: $height + 4rem;
-    }
-
-    .post__overlay {
-      opacity: 0;
-    }
-  }
 }
 
 .post__overlay {

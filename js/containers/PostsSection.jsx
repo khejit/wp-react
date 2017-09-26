@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import store from '../store.jsx';
 import Post from '../components/Post.jsx';
 import * as ajax from '../helpers/ajax.jsx';
 
@@ -13,6 +14,13 @@ class PostsSection extends Component {
         ajax.getTags();
     }
 
+    setActivePost(id){
+        store.dispatch({
+            type: 'SET_ACTIVE_POST',
+            activePost: id
+        })
+    }
+
     render() {
         let posts = this.props.posts.map(post => {
             return (
@@ -22,6 +30,7 @@ class PostsSection extends Component {
                     imageUrl={post.imageUrl}
                     tagsIds={post.tagsIds}
                     shortDesc={post.shortDesc}
+                    onClick={this.setActivePost.bind(this, post.id)}
                 />
             )
         });
