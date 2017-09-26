@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Tag from './Tag.jsx';
+import * as stateHelpers from '../helpers/stateHelpers.jsx';
 
 export default class Post extends Component {
     constructor(props){
@@ -11,8 +12,30 @@ export default class Post extends Component {
 
         this.state = {
             expanded: false,
-            classList: ''
+            classArray: [],
+            tags: []
         }
+    }
+
+    componentDidMount(){
+        this.getOwnTags();
+    }
+
+    getOwnTags(){
+        let tags = this.props.tagsIds.map(tagId => {
+            return {
+                id: tagId,
+                name: stateHelpers.getTagById(tagId).name
+            }
+        });
+
+        this.setState({
+            tags: tags
+        })
+    }
+
+    classList(){
+        return ' ' + this.state.classArray.join(' ')
     }
 
     toggleExpand(){
@@ -26,28 +49,30 @@ export default class Post extends Component {
     expand(){
         this.setState({
             expanded: true,
-            classList: ' expanded'
+            classArray: ['expanded']
         })
     }
 
     fold(){
         this.setState({
             expanded: false,
-            classList: ''
+            classArray: []
         })
     }
 
     render(){
-        let tags = this.props.idTags.slice(0, 2).map(id => {
-            return <Tag key={id} id={id} />;
-        });
+        let tags = this.state.tags ?
+            this.state.tags.slice(0, 2).map(tag =>
+                <Tag key={tag.id} name={tag.name} />
+            )
+            : '';
 
         let style = {
             backgroundImage: `url(${this.props.imageUrl})`
         };
 
         return (
-            <div className={`post posts__post${this.state.classList}`} onClick={this.toggleExpand}>
+            <div className={`post posts__post${this.classList()}`} onClick={this.toggleExpand}>
                 <div style={style} className="post__image"></div>
                 <div className="inner-overlay post__overlay"></div>
                 <div className="post__content">
