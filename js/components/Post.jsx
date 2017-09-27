@@ -19,7 +19,7 @@ export default class Post extends Component {
     }
 
     clickHandle(){
-        this.props.onClick()
+        this.props.onClick(this.postEl)
     }
 
     getOwnTags(){
@@ -46,7 +46,7 @@ export default class Post extends Component {
         };
 
         return (
-            <div className="post posts__post" onClick={this.clickHandle}>
+            <div className="post posts__post" onClick={this.clickHandle} ref={el => this.postEl = el}>
                 <div style={style} className="post__image"></div>
                 <div className="inner-overlay post__overlay"></div>
                 <div className="post__content">

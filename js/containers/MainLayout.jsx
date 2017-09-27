@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import HeaderSection from './HeaderSection.jsx';
-import PostsSection from './PostsSection.jsx';
-import ActivePostContainer from './ActivePostContainer.jsx';
+import PostsAnimationContainer from './PostsAnimationContainer.jsx';
 
 export default class MainLayout extends Component {
     render(){
         return (
             <div>
                 <HeaderSection />
-                <ActivePostContainer />
-                <PostsSection />
+                <PostsAnimationContainer />
                 <section className="section footer">
                     <ul className="footer__links links">
                         <li className="links__link">

@@ -1,7 +1,9 @@
 const defaultState = {
     posts: [],
     filteredPosts: [],
-    activePost: null
+    activePost: null,
+    activeTarget: null,
+    activePostVisible: false
 };
 
 export default (state=defaultState, payload={}) => {
@@ -26,7 +28,12 @@ export default (state=defaultState, payload={}) => {
             }
         case 'SET_ACTIVE_POST':
             return Object.assign({}, state, {
-                activePost: payload.activePost
+                activePost: payload.activePost,
+                activeTarget: payload.activeTarget
+            });
+        case 'SET_ACTIVE_VISIBLE':
+            return Object.assign({}, state, {
+                activePostVisible: true
             })
     }
 

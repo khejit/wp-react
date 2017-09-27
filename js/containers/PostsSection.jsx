@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import store from '../store.jsx';
 import Post from '../components/Post.jsx';
@@ -7,17 +8,34 @@ import * as ajax from '../helpers/ajax.jsx';
 class PostsSection extends Component {
     constructor(props) {
         super(props);
+
+        this.setActivePost = this.setActivePost.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
         ajax.getPosts();
         ajax.getTags();
+
+        this.thisElement = ReactDOM.findDOMNode(this);
     }
 
-    setActivePost(id){
+    handleClick(postId, el){
+        this.setActivePost(postId, el);
+
+        let height = this.thisElement.offsetHeight;
+        this.props.sendHeight(height);
+    };
+
+    setActivePost(id, target){
         store.dispatch({
             type: 'SET_ACTIVE_POST',
-            activePost: id
+            activePost: id,
+            activeTarget: target
+        });
+
+        store.dispatch({
+            type: 'SET_ACTIVE_VISIBLE'
         })
     }
 
@@ -30,13 +48,13 @@ class PostsSection extends Component {
                     imageUrl={post.imageUrl}
                     tagsIds={post.tagsIds}
                     shortDesc={post.shortDesc}
-                    onClick={this.setActivePost.bind(this, post.id)}
+                    onClick={this.handleClick.bind(null, post.id)}
                 />
             )
         });
 
         return (
-            <section className="section posts">
+            <section className="section posts" id="posts-section">
                 {posts}
             </section>
         )
