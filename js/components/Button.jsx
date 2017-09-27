@@ -17,7 +17,9 @@ export default class Button extends Component {
   render() {
     return (
       <button onClick={this.increment.bind(this)} className={'button '+styles.button}>
-        Button clicked: {this.state.count} times
+        <span className="yellow">
+            Button clicked: {this.state.count} times
+        </span>
       </button>
     );
   }

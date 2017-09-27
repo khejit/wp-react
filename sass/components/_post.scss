@@ -1,0 +1,47 @@
+$height: 24rem;
+$expanded-height: 2*$height;
+
+.post {
+  border: 0.1rem solid $border;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+
+  height: $height;
+  transition: $default-transition;
+}
+
+.post__overlay {
+  transition: $default-transition;
+  position: absolute;
+  top: 0;
+}
+
+.post__tags {
+
+}
+
+.post__image {
+  height: $height;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: $default-transition;
+}
+
+.post__content {
+  position: absolute;
+  z-index: 20;
+  bottom: 0;
+  padding: $default-padding;
+  color: white;
+}
+
+.post__heading {
+  text-transform: uppercase;
+  margin: 0.65em 0 0;
+}
+
+.post__description {
+  margin: 0.25em 0 0;
+}

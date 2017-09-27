@@ -1,0 +1,9 @@
+.tags {
+
+}
+
+.tags__tag {
+  &:not(:first-child){
+    margin-left: 0.65rem;
+  }
+}

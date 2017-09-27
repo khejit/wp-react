@@ -1,0 +1,74 @@
+$ham-btn-height: 2.8rem;
+$ham-btn-width: 3.6rem;
+$ham-btn-padding: 0.6rem;
+$ham-span-height: 0.2rem;
+.ham-btn {
+  height: $ham-btn-height;
+  width: $ham-btn-width;
+  position: relative;
+  padding: $ham-btn-padding;
+  cursor: pointer;
+
+  span {
+    display: block;
+    position: absolute;
+    height: 0.2rem;
+    background-color: $grey;
+    transition: all 0.15s ease-in-out;
+    transform-origin: 0 50%;
+
+    &:nth-child(1){
+      width: 2rem;
+      top: $ham-btn-padding;
+    }
+
+    &:nth-child(2){
+      width: 1rem;
+      top: calc(50% - (#{$ham-span-height} /2) );
+    }
+
+    &:nth-child(3){
+      width: 2.4rem;
+      bottom: $ham-btn-padding;
+    }
+
+    @for $i from 1 through 3 {
+      $initialDelay: -0.10s;
+      $delayStep: 0.10s;
+
+      &:nth-child(#{$i}){
+        transition-delay: $initialDelay + $delayStep * $i;
+      }
+    }
+  }
+
+  &.open {
+
+    span {
+      &:nth-child(1){
+        width: 1rem;
+      }
+
+      &:nth-child(2){
+        width: 2.4rem;
+      }
+
+      &:nth-child(3){
+        width: 1.6rem;
+      }
+    }
+  }
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border: 0.1rem solid $tag-border;
+  font-size: $font-size-small;
+}
+
+.inner-overlay {
+  background-color: rgba(0,0,0,0.3);
+  width: 100%;
+  height: 100%;
+}

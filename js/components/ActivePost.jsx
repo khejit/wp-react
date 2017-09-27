@@ -14,7 +14,7 @@ const ActivePost = (props) => {
         : '';
 
     return (
-        <div className="post active-post">
+        <div className="post active-post active-post-container__post">
             <div style={style} className="post__image"></div>
             <div className="inner-overlay post__overlay"></div>
             <div className="post__content">

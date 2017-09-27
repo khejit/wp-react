@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+  padding: 0 1rem;
+
+  .btn-container {
+    width: $menu-btn-size;
+  }
+
+  &.search-visible {
+    .logo {
+      opacity: 0;
+    }
+  }
+}

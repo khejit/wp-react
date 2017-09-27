@@ -31,7 +31,9 @@ class ActivePostContainer extends Component {
         let {heading, desc, tags, imageUrl} = this.state;
 
         return (
-            <ActivePost heading={heading} desc={desc} tags={tags} imageUrl={imageUrl} />
+            <section className="section active-post-container">
+                <ActivePost heading={heading} desc={desc} tags={tags} imageUrl={imageUrl} />
+            </section>
         )
     }
 }

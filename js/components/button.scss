@@ -1,4 +1,14 @@
 .button {
   margin-top: 20px;
   background-color: green;
+
+  :global {
+    .yellow {
+      color: yellow; //works!
+    }
+  }
+}
+
+.button .yellow {
+  color: yellow; //doesn't work
 }
