@@ -22,7 +22,7 @@ class PostsAnimationContainer extends Component {
         this.state = {
             activeContHeight: 'auto',
             activePostTop: 'auto',
-            activePostClasses: {},
+            activePostContClasses: {},
             postsSectionClasses: {},
             activePostContainerRef: null,
             activePostRef: null
@@ -39,21 +39,36 @@ class PostsAnimationContainer extends Component {
         }
     }
 
-    animateToActivePost(top){
-        this.setState({
-            activePostClasses: 'activePost-enter'
-        });
+    animateToActivePost(data){
 
-        let activePost = this.state.activePostRef;
+        let activePost = this.state.activePostRef,
+            activePostCont = this.state.activePostContainerRef,
+            postsSect = document.getElementById('posts-section'),
+            animCon = this.thisElem;
 
         let tl = new TimelineLite();
 
         tl.set(activePost, {
-            top: top
-        }).to(activePost, 0.5, {
-            top: 0,
-            ease: Power2.easeInOut
+            top: data.top
         })
+            .set(activePostCont, {
+                height: data.height
+            })
+            .addLabel('testLabel')
+            .to(activePost, 0.5, {
+                top: 0,
+                ease: Power2.easeInOut
+            }, 'testLabel')
+            .to(postsSect, 0.5, {
+                opacity: 0
+            }, 'testLabel')
+            .addLabel('testLabel2')
+            .to(postsSect, 0.5, {
+                height: '24rem'
+            }, 'testLabel')
+            .to(activePostCont, 0.5, {
+                height: '24rem'
+            }, 'testLabel')
     }
 
     receiveRefs(container, activePost){
@@ -71,13 +86,13 @@ class PostsAnimationContainer extends Component {
 
         /*console.log(data.top)*/
 
-        this.animateToActivePost(data.top);
+        this.animateToActivePost(data);
     }
 
     render(){
         return (
-            <div className={'animation-container '+styles.postsAnimationContainer}>
-                <ActivePostContainer classes={this.state.activePostClasses} sendRefs={this.receiveRefs} />
+            <div className={'animation-container '+styles.postsAnimationContainer} ref={el=>this.thisElem = el}>
+                <ActivePostContainer classes={this.state.activePostContClasses} sendRefs={this.receiveRefs} />
                 <PostsSection classes={this.state.postsSectionClasses} sendData={this.getPostsData} />
             </div>
         )

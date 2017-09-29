@@ -21,7 +21,7 @@ export default class Post extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.shouldUpdateTags){
+        if(nextProps.shouldUpdateTags || this.props.shouldUpdateTags){
             this.getOwnTags();
         }
     }
