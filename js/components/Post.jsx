@@ -15,7 +15,15 @@ export default class Post extends Component {
     }
 
     componentDidMount(){
-        this.getOwnTags();
+        if(this.props.shouldUpdateTags){
+            this.getOwnTags();
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.shouldUpdateTags){
+            this.getOwnTags();
+        }
     }
 
     clickHandle(){

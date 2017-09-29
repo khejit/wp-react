@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ActivePost from '../components/ActivePost.jsx';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 import * as stateHelpers from '../helpers/stateHelpers.jsx';
 
 class ActivePostContainer extends Component {
@@ -26,15 +27,23 @@ class ActivePostContainer extends Component {
         });
     }
 
+    componentDidMount(){
+        this.props.sendRefs(this.container, this.activePost)
+    }
+
     render(){
         let {heading, desc, tags, imageUrl} = this.state;
-        let styles = {
+        let contStyles = {
             height: this.props.height
-        };
+        },
+        postStyles = {
+            top: this.props.top
+        },
+        classes = this.props.classes ? ' ' + classNames(this.props.classes) : '';
 
         return (
-            <section className="section active-post-container" style={styles}>
-                <ActivePost heading={heading} desc={desc} tags={tags} imageUrl={imageUrl} />
+            <section ref={el=>{this.container = el}} className={`section active-post-container${classes}`} style={contStyles}>
+                <ActivePost sendRef={(ref)=>{this.activePost = ref}} style={postStyles} heading={heading} desc={desc} tags={tags} imageUrl={imageUrl} />
             </section>
         )
     }

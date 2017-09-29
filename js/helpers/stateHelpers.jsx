@@ -12,7 +12,7 @@ export function getTagsFromTagsIds(tagsIds){
     return tagsIds.map(tagId => {
         return {
             id: tagId,
-            name: getTagById(tagId).name
+            name: getTagById(tagId) ? getTagById(tagId).name : '...'
         }
     });
 }
