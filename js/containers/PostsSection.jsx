@@ -27,7 +27,7 @@ class PostsSection extends Component {
                 })
             });
 
-        this.thisElement = ReactDOM.findDOMNode(this);
+        this.props.sendRefs(this.thisElem);
     }
 
     handleClick(postId, el){
@@ -35,9 +35,10 @@ class PostsSection extends Component {
 
         let data = {
             top: el.offsetTop,
-            height: this.thisElement.offsetHeight
+            height: this.thisElem.offsetHeight,
+            postHeight: el.offsetHeight
         };
-        this.props.sendData(data);
+        this.props.postClicked(data);
     };
 
     setActivePost(id, target){
@@ -69,7 +70,7 @@ class PostsSection extends Component {
         classes = this.props.classes ? ' ' + classNames(this.props.classes) : '';
 
         return (
-            <section className={`section posts${classes}`} id="posts-section">
+            <section ref={el=>{this.thisElem = el}} className={`section posts${classes}`} id="posts-section">
                 {posts}
             </section>
         )

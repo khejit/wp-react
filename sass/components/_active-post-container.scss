@@ -1,6 +1,8 @@
 .active-post-container {
   position: absolute;
   width: 100%;
+  z-index: 10;
+  opacity: 0;
 }
 
 .active-post-container__post {

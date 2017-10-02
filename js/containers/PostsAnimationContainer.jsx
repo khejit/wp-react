@@ -1,31 +1,32 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import autobind from 'react-autobind';
 import PostsSection from './PostsSection.jsx';
 import ActivePostContainer from './ActivePostContainer.jsx';
 //import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 import styles from './postsAnimationContainer.scss';
-import {TweenMax, Power2, TimelineLite} from 'gsap';
+import {Power2, TimelineLite} from 'gsap';
 
-let activePostAppearTime = 500,
-    activePostLeaveTime = 200,
-    postsSectionAppearTime = 200,
-    postsSectionLeaveTime = 500;
+const activePostAppearTime = 0.5,
+    activePostLeaveTime = 0.2,
+    postsSectionAppearTime = 0.4,
+    postsSectionLeaveTime = 0.2;
 
 class PostsAnimationContainer extends Component {
     constructor(props){
         super(props);
 
-        this.getPostsData = this.getPostsData.bind(this);
-        this.animateToActivePost = this.animateToActivePost.bind(this);
-        this.receiveRefs = this.receiveRefs.bind(this);
+        autobind(this); // bind all methods which are not react-specific
 
         this.state = {
             activeContHeight: 'auto',
             activePostTop: 'auto',
+            normalPostHeight: 'auto',
             activePostContClasses: {},
             postsSectionClasses: {},
             activePostContainerRef: null,
-            activePostRef: null
+            activePostRef: null,
+            postsSectionRef: null
         }
     }
 
@@ -39,11 +40,20 @@ class PostsAnimationContainer extends Component {
         }
     }
 
-    animateToActivePost(data){
+    postClicked(data){
+        this.setState({
+            activeContHeight: data.height,
+            activePostTop: data.top,
+            normalPostHeight: data.postHeight
+        });
 
+        this.animateToActivePost(data);
+    }
+
+    animateToActivePost(data){
         let activePost = this.state.activePostRef,
             activePostCont = this.state.activePostContainerRef,
-            postsSect = document.getElementById('posts-section'),
+            postsSect = this.state.postsSectionRef,
             animCon = this.thisElem;
 
         let tl = new TimelineLite();
@@ -52,48 +62,43 @@ class PostsAnimationContainer extends Component {
             top: data.top
         })
             .set(activePostCont, {
-                height: data.height
+                height: data.height,
+                opacity: 1
             })
-            .addLabel('testLabel')
-            .to(activePost, 0.5, {
+            .addLabel('firstStep')
+            .to(activePost, activePostAppearTime, {
                 top: 0,
-                ease: Power2.easeInOut
-            }, 'testLabel')
-            .to(postsSect, 0.5, {
+                ease: Power2.easeOut
+            }, 'firstStep')
+            .to(postsSect, postsSectionLeaveTime, {
                 opacity: 0
-            }, 'testLabel')
-            .addLabel('testLabel2')
-            .to(postsSect, 0.5, {
-                height: '24rem'
-            }, 'testLabel')
-            .to(activePostCont, 0.5, {
-                height: '24rem'
-            }, 'testLabel')
+            }, 'firstStep')
+            .to(postsSect, activePostAppearTime, {
+                height: data.postHeight
+            }, 'firstStep')
+            .to(activePostCont, activePostAppearTime, {
+                height: data.postHeight
+            }, 'firstStep')
     }
 
-    receiveRefs(container, activePost){
+    receiveActiveContRefs(containerRef, activePostRef){
         this.setState({
-            activePostContainerRef: container,
-            activePostRef: activePost
+            activePostContainerRef: containerRef,
+            activePostRef: activePostRef
         })
     }
 
-    getPostsData(data){
+    receivePostsSectRef(postsSectionRef){
         this.setState({
-            activeContHeight: data.height,
-            //activePostTop: data.top
-        });
-
-        /*console.log(data.top)*/
-
-        this.animateToActivePost(data);
+            postsSectionRef
+        })
     }
 
     render(){
         return (
             <div className={'animation-container '+styles.postsAnimationContainer} ref={el=>this.thisElem = el}>
-                <ActivePostContainer classes={this.state.activePostContClasses} sendRefs={this.receiveRefs} />
-                <PostsSection classes={this.state.postsSectionClasses} sendData={this.getPostsData} />
+                <ActivePostContainer classes={this.state.activePostContClasses} sendRefs={this.receiveActiveContRefs} />
+                <PostsSection classes={this.state.postsSectionClasses} postClicked={this.postClicked} sendRefs={this.receivePostsSectRef} />
             </div>
         )
     }
