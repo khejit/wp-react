@@ -21,11 +21,11 @@ class PostsSection extends Component {
     componentDidMount() {
         ajax.getPosts();
         ajax.getTags()
-            .then(
+            .then(()=>{
                 this.setState({
                     tagsRetrieved: true
                 })
-            );
+            });
 
         this.thisElement = ReactDOM.findDOMNode(this);
     }

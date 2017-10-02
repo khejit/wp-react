@@ -1,3 +1,5 @@
+import * as constants from '../constants.jsx';
+
 const defaultState = {
     posts: [],
     filteredPosts: [],
@@ -8,12 +10,12 @@ const defaultState = {
 
 export default (state=defaultState, payload={}) => {
     switch (payload.type){
-        case 'SET_POSTS':
+        case constants.SET_POSTS:
             return Object.assign({}, state, {
                 posts: payload.posts,
                 filteredPosts: payload.posts
             });
-        case 'FILTER_POSTS':
+        case constants.FILTER_POSTS:
             if(payload.postsFilter){
                 let filteredPosts = state.posts.filter(post => {
                     return post.heading.toLowerCase().includes(payload.postsFilter.toLowerCase())
@@ -26,12 +28,12 @@ export default (state=defaultState, payload={}) => {
                     filteredPosts: state.posts
                 });
             }
-        case 'SET_ACTIVE_POST':
+        case constants.SET_ACTIVE_POST:
             return Object.assign({}, state, {
                 activePost: payload.activePost,
                 activeTarget: payload.activeTarget
             });
-        case 'SET_ACTIVE_VISIBLE':
+        case constants.SET_ACTIVE_VISIBLE:
             return Object.assign({}, state, {
                 activePostVisible: true
             })
