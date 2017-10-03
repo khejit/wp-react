@@ -5,7 +5,7 @@ import PostsAnimationContainer from './PostsAnimationContainer.jsx';
 export default class MainLayout extends Component {
     render(){
         return (
-            <div>
+            <div className="frame">
                 <HeaderSection />
                 <PostsAnimationContainer />
                 <section className="section footer">
