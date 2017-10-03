@@ -3,7 +3,10 @@
   overflow: hidden;
 }
 
+$height: 24rem;
+
 .posts__post {
+  height: $height;
   position: relative;
   background-color: $grey;
 }

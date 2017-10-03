@@ -6,6 +6,7 @@ import ActivePostContainer from './ActivePostContainer.jsx';
 //import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 import styles from './postsAnimationContainer.scss';
 import {Power2, TimelineLite} from 'gsap';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
 
 const activePostAppearTime = 0.5,
     activePostLeaveTime = 0.2,
@@ -26,6 +27,7 @@ class PostsAnimationContainer extends Component {
             postsSectionClasses: {},
             activePostContainerRef: null,
             activePostRef: null,
+            activePostImgRef: null,
             postsSectionRef: null
         }
     }
@@ -52,9 +54,9 @@ class PostsAnimationContainer extends Component {
 
     animateToActivePost(data){
         let activePost = this.state.activePostRef,
+            activePostImg = this.state.activePostImgRef,
             activePostCont = this.state.activePostContainerRef,
-            postsSect = this.state.postsSectionRef,
-            animCon = this.thisElem;
+            postsSect = this.state.postsSectionRef;
 
         let tl = new TimelineLite();
 
@@ -66,6 +68,9 @@ class PostsAnimationContainer extends Component {
                 opacity: 1
             })
             .addLabel('firstStep')
+            .add(TweenMax.to(window, 0.2, {
+                scrollTo: 0
+            }))
             .to(activePost, activePostAppearTime, {
                 top: 0,
                 ease: Power2.easeOut
@@ -73,18 +78,27 @@ class PostsAnimationContainer extends Component {
             .to(postsSect, postsSectionLeaveTime, {
                 opacity: 0
             }, 'firstStep')
-            .to(postsSect, activePostAppearTime, {
+            /*.to(postsSect, activePostAppearTime, {
                 height: data.postHeight
-            }, 'firstStep')
-            .to(activePostCont, activePostAppearTime, {
-                height: data.postHeight
-            }, 'firstStep')
+            }, 'firstStep')*/
+            .addLabel('secondStep')
+            .to(activePost, 0.3, {
+                //height: data.height,
+                className: '+=active'
+            }, 'secondStep')
+            .to(activePostImg, 0.15, {
+                height: '32rem'
+            }, 'secondStep')
+            .to(activePostCont, 0.15, {
+                height: data.height
+            }, 'secondStep')
     }
 
-    receiveActiveContRefs(containerRef, activePostRef){
+    receiveActiveContRefs(containerRef, activePostRef, activePostImgRef){
         this.setState({
             activePostContainerRef: containerRef,
-            activePostRef: activePostRef
+            activePostRef: activePostRef,
+            activePostImgRef: activePostImgRef
         })
     }
 

@@ -6,8 +6,12 @@ class ActivePost extends Component {
         super(props);
     }
 
+    componentDidMount(){
+        this.props.sendRefs(this.thisElement, this.imageRef)
+    }
+
     render(){
-        let {heading, desc, imageUrl} = this.props,
+        let {heading, shortDesc, desc, imageUrl} = this.props,
             style = {
                 backgroundImage: `url(${imageUrl})`
             };
@@ -19,16 +23,17 @@ class ActivePost extends Component {
             : '';
 
         return (
-            <div ref={(el)=>{this.props.sendRef(el)}} style={this.props.style} className="post active-post active-post-container__post">
-                <div style={style} className="post__image"></div>
+            <div ref={(el)=>{this.thisElement = el}} style={this.props.style} className="post active-post active-post-container__post">
+                <div ref={(el)=>{this.imageRef = el}} style={style} className="post__image"></div>
                 <div className="inner-overlay post__overlay"></div>
                 <div className="post__content">
                     <div className="tags post__tags">
                         {tags}
                     </div>
                     <h2 className="post__heading">{heading}</h2>
-                    <p className="post__description">{desc}</p>
+                    <p className="post__description">{shortDesc}</p>
                 </div>
+                <p className="active__body" id="active-body">{desc}</p>
             </div>
         )
     }

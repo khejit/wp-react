@@ -2,6 +2,16 @@
 
 
   :global {
+    .active-post.active {
+      .active__body {
+        opacity: 1;
+      }
+
+      .post__content {
+
+      }
+    }
+
     .activePost-enter {
 
     }

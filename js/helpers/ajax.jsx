@@ -11,6 +11,7 @@ export function getPosts(){
                     id: post.id,
                     heading: post.title.rendered,
                     shortDesc: post.acf.short_desc,
+                    desc: post.acf.description,
                     imageUrl: post.acf.photo,
                     tagsIds: post.tags
                 }
