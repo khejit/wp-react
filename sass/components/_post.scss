@@ -26,7 +26,7 @@ $expanded-height: 2*$height;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: $default-transition;
+  transition: height $default-transition-time;
 }
 
 .post__content {

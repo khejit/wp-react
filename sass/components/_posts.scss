@@ -1,9 +1,10 @@
+$height: 24rem;
+
 .posts {
   position: relative;
   overflow: hidden;
+  min-height: 3*$height;
 }
-
-$height: 24rem;
 
 .posts__post {
   height: $height;

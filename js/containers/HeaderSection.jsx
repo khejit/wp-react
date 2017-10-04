@@ -2,39 +2,70 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import store from '../store.jsx';
+import * as constants from '../constants.jsx';
+import classNames from 'classnames';
 import Icon from '../components/Icon.jsx';
 import HamBtn from '../components/HamBtn.jsx';
+
+function addElemToArr(arr, item){
+    let newArr = arr;
+    newArr.push(item);
+    return newArr;
+}
+
+function removeElemFromArr(arr, item){
+    return arr.filter((i)=>{return i !== item})
+}
 
 class HeaderSection extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            classList: '',
+            classArray: [],
             searchVisible: false
         };
 
         this.toggleMenu = this.toggleMenu.bind(this);
+        this.backToPosts = this.backToPosts.bind(this);
         this.toggleSearch = this.toggleSearch.bind(this);
         this.filterPosts = _.debounce(this.filterPosts.bind(this), 250);
     }
 
     toggleMenu() {
         store.dispatch({
-            type: 'TOGGLE_MENU'
+            type: constants.TOGGLE_MENU
         })
+    }
+
+    backToPosts(){
+        store.dispatch({
+            type: constants.MENU_BACK_FALSE
+        });
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.menuBackActive){
+            this.setState({
+                classArray: addElemToArr(this.state.classArray, 'header--back-active')
+            })
+        } else {
+            this.setState({
+                classArray: removeElemFromArr(this.state.classArray, 'header--back-active')
+            })
+        }
     }
 
     toggleSearch() {
         if (this.state.searchVisible) {
             this.setState({
                 searchVisible: false,
-                classList: ''
+                classArray: removeElemFromArr(this.state.classArray, 'header--search-visible')
             })
         } else {
             this.setState({
                 searchVisible: true,
-                classList: ' search-visible'
+                classArray: addElemToArr(this.state.classArray, 'header--search-visible')
             })
         }
     }
@@ -49,9 +80,14 @@ class HeaderSection extends Component {
     }
 
     render() {
+        let classes = classNames(this.state.classArray) ?  ' ' + classNames(this.state.classArray) : '';
+
         return (
-            <section className={`section header${this.state.classList}`}>
-                <div className="btn-container">
+            <section className={`section header${classes}`}>
+                <div className="btn-container back-btn-container" onClick={this.backToPosts}>
+                    <Icon type="left-arrow" className="left-arrow"/>
+                </div>
+                <div className="btn-container menu-btn-container">
                     <HamBtn clickHandler={this.toggleMenu} classList={this.props.menuOpen ? ' open' : ''}/>
                 </div>
                 <div className="logo-container search-container">
@@ -69,7 +105,8 @@ class HeaderSection extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        menuOpen: store.menuState.menuOpen
+        menuOpen: store.menuState.menuOpen,
+        menuBackActive: store.menuState.menuBackActive
     }
 };
 

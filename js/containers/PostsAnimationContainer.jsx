@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import store from '../store.jsx';
+import * as constants from '../constants.jsx';
 import autobind from 'react-autobind';
 import PostsSection from './PostsSection.jsx';
 import ActivePostContainer from './ActivePostContainer.jsx';
@@ -10,7 +12,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
 
 const activePostAppearTime = 0.5,
     activePostLeaveTime = 0.2,
-    postsSectionAppearTime = 0.4,
+    postsSectionAppearTime = 0.3,
     postsSectionLeaveTime = 0.2;
 
 class PostsAnimationContainer extends Component {
@@ -37,8 +39,8 @@ class PostsAnimationContainer extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(!this.props.activeVisible && nextProps.activeVisible){
-
+        if(this.props.menuBackActive && !nextProps.menuBackActive){
+            this.animateToPosts()
         }
     }
 
@@ -47,6 +49,10 @@ class PostsAnimationContainer extends Component {
             activeContHeight: data.height,
             activePostTop: data.top,
             normalPostHeight: data.postHeight
+        });
+
+        store.dispatch({
+            type: constants.MENU_BACK_TRUE
         });
 
         this.animateToActivePost(data);
@@ -78,6 +84,9 @@ class PostsAnimationContainer extends Component {
             .to(postsSect, postsSectionLeaveTime, {
                 opacity: 0
             }, 'firstStep')
+            .to(activePostImg, 0.05, {
+                height: '32rem'
+            }, 'firstStep')
             /*.to(postsSect, activePostAppearTime, {
                 height: data.postHeight
             }, 'firstStep')*/
@@ -86,11 +95,31 @@ class PostsAnimationContainer extends Component {
                 //height: data.height,
                 className: '+=active'
             }, 'secondStep')
-            .to(activePostImg, 0.15, {
-                height: '32rem'
-            }, 'secondStep')
             .to(activePostCont, 0.15, {
                 height: data.height
+            }, 'secondStep')
+    }
+
+    animateToPosts(){
+        let activePost = this.state.activePostRef,
+            activePostImg = this.state.activePostImgRef,
+            activePostCont = this.state.activePostContainerRef,
+            postsSect = this.state.postsSectionRef,
+            normalPostHeight = this.state.normalPostHeight;
+
+        let tl = new TimelineLite();
+
+        tl
+            .addLabel('firstStep')
+            .to(activePostCont, activePostLeaveTime, {
+                opacity: 0
+            }, 'firstStep')
+            .to(postsSect, postsSectionAppearTime, {
+                opacity: 1
+            }, 'firstStep')
+            .addLabel('secondStep')
+            .set(activePostImg, {
+                height: normalPostHeight
             }, 'secondStep')
     }
 
@@ -110,7 +139,7 @@ class PostsAnimationContainer extends Component {
 
     render(){
         return (
-            <div className={'animation-container '+styles.postsAnimationContainer} ref={el=>this.thisElem = el}>
+            <div className={'animation-container '+styles.animCont} ref={el=>this.thisElem = el}>
                 <ActivePostContainer classes={this.state.activePostContClasses} sendRefs={this.receiveActiveContRefs} />
                 <PostsSection classes={this.state.postsSectionClasses} postClicked={this.postClicked} sendRefs={this.receivePostsSectRef} />
             </div>
@@ -120,7 +149,7 @@ class PostsAnimationContainer extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        activeVisible: store.postsState.activePostVisible
+        menuBackActive: store.menuState.menuBackActive
     }
 };
 

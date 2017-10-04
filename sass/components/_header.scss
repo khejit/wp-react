@@ -7,11 +7,39 @@
 
   .btn-container {
     width: $menu-btn-size;
+    cursor: pointer;
   }
 
-  &.search-visible {
-    .logo {
-      opacity: 0;
-    }
+  .back-btn-container {
+    height: 3.6rem;
+    display: none;
+    position: relative;
+  }
+
+  .left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2.4rem;
+  }
+}
+
+.header--search-visible {
+  .logo {
+    opacity: 0;
+  }
+}
+
+.header--back-active {
+  .back-btn-container {
+    display: block;
+  }
+  .menu-btn-container {
+    display: none;
+  }
+  .search-btn-container {
+    opacity: 0;
+    pointer-events: none;
   }
 }
