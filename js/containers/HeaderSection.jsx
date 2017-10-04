@@ -93,7 +93,7 @@ class HeaderSection extends Component {
                 <div className="logo-container search-container">
                     <h3 className="logo">PHTWR</h3>
                     {this.state.searchVisible &&
-                    <input type="text" className="search-container__search-input" ref={el => this.inputRef = el} onChange={this.filterPosts}/>}
+                    <input autoFocus type="text" className="search-container__search-input" ref={el => this.inputRef = el} onChange={this.filterPosts}/>}
                 </div>
                 <div className="btn-container search-btn-container" onClick={this.toggleSearch}>
                     <Icon type="magnifier" className="magnifier"/>
