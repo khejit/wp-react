@@ -44,11 +44,11 @@ module.exports = {
     },
     plugins: [
         // uncomment those lines for production
-        //new webpack.optimize.UglifyJsPlugin({
-        //  compress: { warnings: false },
-        //  comments: false,
-        //  minimize: false
-        //})
-        //new webpack.optimize.AggressiveMergingPlugin()
+        new webpack.optimize.UglifyJsPlugin({
+          compress: { warnings: false },
+          comments: false,
+          minimize: false
+        }),
+        new webpack.optimize.AggressiveMergingPlugin()
     ]
 };
