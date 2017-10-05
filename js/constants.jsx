@@ -1,5 +1,5 @@
-export const postsRoute = 'http://wp-react.local/backend/wp-json/wp/v2/posts';
-export const tagsRoute = 'http://wp-react.local/backend/wp-json/wp/v2/tags';
+export const postsRoute = '/backend/wp-json/wp/v2/posts';
+export const tagsRoute = '/backend/wp-json/wp/v2/tags';
 
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const MENU_BACK_TRUE = 'MENU_BACK_TRUE';
