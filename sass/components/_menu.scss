@@ -6,6 +6,7 @@ $timing: 0.35s;
   left: 0;
   height: 100%;
   width: 40rem;
+  max-width: 100%;
   background-color: $grey;
   transition: $default-transition;
   z-index: 100;

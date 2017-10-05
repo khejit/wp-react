@@ -22,4 +22,4 @@ Greensock for javascript animation.
 ## Skills learned
 
 I learned how to animate transition between components, some Redux, how to include component-specific styles to be loaded by Webpack.
-I also tried to apply bem to my scss.
+I also tried to apply BEM to my scss.
