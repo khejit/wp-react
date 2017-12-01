@@ -24,4 +24,4 @@ Greensock for javascript animation.
 I learned how to animate transition between components, some Redux, how to include component-specific styles to be loaded by Webpack.
 I also tried to apply BEM to my scss.
 
-# Live project can be seen here: http://khejit.ayz.pl/wp-react/public/
+# Live project can be seen here: http://khejit.io/wp-react/public/
